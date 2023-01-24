@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap");
-@import 'styles/common';
+@import "styles/common";
 :root {
   --blue: rgba(33, 63, 125, 1);
   --lightblue: rgba(57, 205, 204, 1);
@@ -23,7 +23,18 @@ a {
   text-decoration: none;
 }
 
-.App{
+html,body {
+  overflow-x: hidden;
+  @media (max-width: 850px) {
+    overflow-x: scroll;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+}
+
+.App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

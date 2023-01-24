@@ -1,21 +1,78 @@
+@mixin lg-screen {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+  @mixin md-screen {
+    @media (max-width:995px) {
+      @content;
+    }
+  }
+  @mixin sm-screen {
+    @media (max-width:850px) {
+      @content;
+    }
+  }
+
 .brand{
-    padding: 0 9rem;
+    padding: 0 6rem;
     height: 100px;
+
+    @include md-screen(){
+        padding: 0 3rem;
+    }
 }
 
 .userLogin {
     gap: 3rem;
     padding: 0 5rem;
+    min-width: 320px;
     height: 500px;
+    position: relative;
+
+    @include md-screen(){
+        padding: 0 1.5rem;
+    }
+    @include lg-screen(){
+        padding: 0 2rem;    
+    }
+
+    @include sm-screen(){
+        padding: 0;
+        overflow-x: scroll;
+    }
 
     .image{
-        height: 340px;
+        height: 440px;
         width: 55%;
+       
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        @include sm-screen(){
+            width: 100%;
+
+            img{
+                object-fit: cover;
+            }
+        }
+       
     }
     
     .user {
         row-gap: 3rem;
         width: 35%;
+
+        @include sm-screen(){
+            position: absolute;
+            background: var(--white);
+            box-shadow: 1px 2px 10px var(--paleblue);
+            padding: 2rem 2rem;
+            width: 300px;
+        }
 
         .greeting {
             gap: 0.8rem;
@@ -36,10 +93,9 @@
 
                 input{
                     all: unset;
-                    padding: 1rem 5rem 1rem 1.5rem;
+                    padding: 1rem 4rem 1rem 1.5rem;
                     border: 1px solid var(--grey);
                     border-radius: 8px;
-                    
                 }
 
                 .password{

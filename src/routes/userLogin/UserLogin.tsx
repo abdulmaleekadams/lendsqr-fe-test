@@ -33,7 +33,7 @@ const UserLogin = () => {
           </div>
 
           <div className="userDetails">
-            <form action="" method="post" className="flexCol">
+            <form action="/dashboard" method="post" className="flexCol">
               <input type="email" name="email" placeholder="Email" />
               <div className="password flexAlignCenter">
                 <input type={type} name="password" placeholder="Password" />

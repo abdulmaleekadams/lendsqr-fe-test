@@ -1,9 +1,9 @@
 import React from 'react'
-
-const App: React.FC = () => {
+import './App.scss'
+const App= () => {
   return (
-    <div>
-      <span className="heading"></span>
+    <div className='App'>
+      
     </div>
   )
 }

@@ -1,0 +1,35 @@
+.flex{
+    display: flex;
+}
+
+.flexCenter{
+    @extend .flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexAlignCenter{
+    @extend .flex;
+    align-items: center;
+}
+
+.flexJustifyCenter{
+    @extend .flex;
+    justify-content: center;
+}
+
+.flexBetween{
+    @extend .flex;
+    justify-content: space-between;
+}
+
+.flexCol {
+    @extend .flex;
+    flex-direction: column;
+}
+
+.flexColBetween {
+    @extend .flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

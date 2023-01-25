@@ -6,9 +6,10 @@
   --grey: rgba(84, 95, 125, 1);
   --red: rgba(228, 3, 59, 1);
   --green: rgba(57, 205, 98, 1);
-  --paleblue: rgba(33, 63, 125, 0.1);
   --yellow: rgba(233, 178, 0, 1);
   --white: #fff;
+  --paleblue: rgba(33, 63, 125, 0.1);
+  --palelightblue: rgba(57, 205, 204, 0.05)
 }
 
 * {
@@ -24,7 +25,7 @@ a {
 }
 
 html,body {
-  overflow-x: hidden;
+  overflow: hidden;
   @media (max-width: 850px) {
     overflow-x: scroll;
   }
@@ -35,7 +36,7 @@ html,body {
 }
 
 .App {
-  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

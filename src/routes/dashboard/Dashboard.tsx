@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import Header from "../../components/header";
+import Sidebar from "../../components/sidebar";
+import "./dashboard.scss";
 
-const Dashboard = () => {
+type Props = {
+  children?: any;
+};
+
+const Dashboard = ({ children }: Props) => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <div className="dashboard">
+      <Header />
+      <Sidebar />
+      <div className="content">{children}</div>
+    </div>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

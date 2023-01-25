@@ -1,0 +1,27 @@
+.dashboard {
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas:
+    "header header header header header"
+    "sidebar content content content content";
+
+  .header {
+    grid-area: header;
+    background: var(--white);
+    height: 100px;
+    box-shadow: 0px 3px 5px var(--paleblue);
+    z-index: 999;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    width: 237px;
+    min-height: 100vh;
+    background: var(--white);
+  }
+
+  .content{
+    grid-area: content;
+    padding-top:100px ;
+  }
+}

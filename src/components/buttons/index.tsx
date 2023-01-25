@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 type Props = {
   label: string;
-  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
   btnType: "button" | "reset" | "submit";
   variant: "primary" | "secondary" | "warning" | "danger";
   customClass?: string;

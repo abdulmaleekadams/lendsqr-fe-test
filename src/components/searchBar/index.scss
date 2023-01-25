@@ -1,0 +1,26 @@
+.searchContainer {
+  border: 1px solid grey;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    all: unset;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    width: 250px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--grey);
+  }
+
+  button {
+    all: unset;
+    border-radius: 8px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: var(--lightblue);
+    padding: 0.7rem 1.5rem;
+  }
+}

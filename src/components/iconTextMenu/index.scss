@@ -1,0 +1,9 @@
+.iconTextMenu {
+    gap: 0.8rem;
+    color: var(--blue);
+    opacity: 0.5;
+
+    &.active{
+        opacity: 1;
+    }
+}

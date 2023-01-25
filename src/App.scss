@@ -35,6 +35,10 @@ html,body {
   }
 }
 
+button{
+  cursor: pointer;
+}
+
 .App {
   max-height: 100vh;
   display: flex;

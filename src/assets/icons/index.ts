@@ -26,6 +26,10 @@ export { ReactComponent as SystemsMessages } from "./systems messages.svg";
 export { ReactComponent as Search } from "./search.svg";
 export { ReactComponent as Switch } from "./switch organization.svg";
 export { ReactComponent as ChevronDown } from "./chevronDown.svg";
+export { ReactComponent as Filter } from "./filter.svg";
+export { ReactComponent as Dots } from "./dots.svg";
+
+
 
 
 

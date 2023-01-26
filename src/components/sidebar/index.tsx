@@ -97,7 +97,11 @@ const Sidebar = () => {
     <div className="sidebar flexColCenter">
       <div className="container flexCol">
         <div className="organizationMenu">
-          <a className="menuItemLink flexStartCenter" href={`dashboard`} aria-label="Dashboard">
+          <a
+            className="menuItemLink flexStartCenter"
+            href={`dashboard`}
+            aria-label="Dashboard"
+          >
             <IconTextMenu text={"Switch Organization"} active={true} />
             <ChevronDown />
           </a>

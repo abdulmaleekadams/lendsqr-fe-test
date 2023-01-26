@@ -1,6 +1,8 @@
 .dashboard {
   min-height: 100vh;
   display: grid;
+  grid-template-columns:minmax(50px, 240px) 1fr  ;
+  grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
     "header header header header header"
     "sidebar content content content content";
@@ -11,11 +13,13 @@
 
   .sidebar {
     grid-area: sidebar;
-    
+    z-index: 99;
   }
 
-  .content{
+  .content {
     grid-area: content;
-    padding-top:100px ;
+    padding-top: 100px;
+    padding: 100px 20px 10px;
+    overflow: scroll;
   }
 }

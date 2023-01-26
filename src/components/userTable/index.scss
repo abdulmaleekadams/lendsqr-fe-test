@@ -1,0 +1,76 @@
+.userTable {
+  background: var(--white);
+  box-shadow: 0px 3px 3px 2px var(--paleblue);
+  width: 100%;
+  overflow-y: scroll;
+  padding: 15px 24px;
+  .userTableHeader {
+    width: 100%;
+    text-transform: uppercase;
+    column-gap: 1rem;
+
+    .title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 1rem 0;
+      align-items: center;
+      column-gap: 0.4rem;
+    }
+  }
+
+  .userTableBody {
+    margin-top: 1.2rem;
+  overflow-y: scroll;
+
+    .details {
+      column-gap: 1rem;
+      align-items: center;
+      padding: 1rem 0 1.2rem;
+      border-bottom: 1px solid var(--paleblue);
+
+      >div p{
+        width: 100%;
+        overflow: hidden;
+        line-clamp: 1;        
+      }
+
+      .status {
+        padding: 5px 15px;
+        background: var(--paleblue);
+        border-radius: 30px;
+        width: max-content;
+      }
+
+      .detailsButton {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .organization,
+  .username {
+    width: 15%;
+    // background: palegreen;
+  }
+  .username {
+    // background: lightcoral;
+  }
+  .email {
+    width: 20%;
+    // background: palegoldenrod;
+  }
+
+  .phone {
+    // background: navajowhite;
+    width: 15%;
+  }
+
+  .date {
+    width: 20%;
+    // background: firebrick;
+  }
+  .status {
+    width: 10%;
+    // background: bisque;
+  }
+}

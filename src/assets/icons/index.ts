@@ -28,6 +28,13 @@ export { ReactComponent as Switch } from "./switch organization.svg";
 export { ReactComponent as ChevronDown } from "./chevronDown.svg";
 export { ReactComponent as Filter } from "./filter.svg";
 export { ReactComponent as Dots } from "./dots.svg";
+export { ReactComponent as TUsers } from "./tUsers.svg";
+export { ReactComponent as AUsers } from "./aUsers.svg";
+export { ReactComponent as LUsers } from "./userL.svg";
+export { ReactComponent as SUsers } from "./userSv.svg";
+
+
+
 
 
 

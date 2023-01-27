@@ -112,13 +112,14 @@ const Sidebar = () => {
           </a>
         </div>
         {menuGroup.map((menuItem) => (
-          <div className="menuItem flexCol">
+          <div className="menuItem flexCol" key={menuItem.title}>
             <p>{menuItem.title}</p>
             {menuItem.menu.map((item) => (
               <a
                 className="menuItemLink"
                 href={item.text.toLowerCase().replaceAll(" ", "-")}
                 aria-label={item.text}
+                key={item.text}
               >
                 <IconTextMenu text={item.text} icon={item.icon} />
               </a>

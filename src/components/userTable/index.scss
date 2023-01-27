@@ -4,10 +4,13 @@
   width: 100%;
   overflow-y: scroll;
   padding: 15px 24px;
+  height: auto;
+  min-width: 900px;
+
   .userTableHeader {
     width: 100%;
     text-transform: uppercase;
-    column-gap: 1rem;
+    column-gap: 0.75rem;
 
     .title {
       font-size: 0.75rem;
@@ -20,18 +23,21 @@
 
   .userTableBody {
     margin-top: 1.2rem;
-  overflow-y: scroll;
+    overflow: scroll;
+    width: 100%;
 
     .details {
-      column-gap: 1rem;
+      column-gap: 0.75rem;
       align-items: center;
       padding: 1rem 0 1.2rem;
-      border-bottom: 1px solid var(--paleblue);
-
-      >div p{
-        width: 100%;
-        overflow: hidden;
-        line-clamp: 1;        
+      position: relative;
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--paleblue);
+      }
+      > div {
+        p {
+          font-size: 0.8rem;
+        }
       }
 
       .status {
@@ -48,29 +54,24 @@
   }
 
   .organization,
-  .username {
+  .username,
+  .phone {
     width: 15%;
-    // background: palegreen;
-  }
-  .username {
-    // background: lightcoral;
-  }
-  .email {
-    width: 20%;
-    // background: palegoldenrod;
+    flex: 0 1 15%;
   }
 
-  .phone {
-    // background: navajowhite;
-    width: 15%;
+  .email {
+    width: 17%;
+    flex: 0 1 17%;
   }
 
   .date {
     width: 20%;
-    // background: firebrick;
+    flex: 0 1 20%;
   }
+
   .status {
-    width: 10%;
-    // background: bisque;
+    width: 8%;
+    flex: 0 1 8%;
   }
 }

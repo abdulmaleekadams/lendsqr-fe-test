@@ -1,12 +1,15 @@
 .dashboard {
   min-height: 100vh;
   display: grid;
-  grid-template-columns:minmax(50px, 240px) 1fr  ;
+  grid-template-columns: minmax(50px, 240px) 1fr;
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
     "header header header header header"
     "sidebar content content content content";
 
+  @media (max-width: 995px) {
+    grid-template-columns: minmax(50px, auto) 1fr;
+  }
   .header {
     grid-area: header;
   }
@@ -14,12 +17,51 @@
   .sidebar {
     grid-area: sidebar;
     z-index: 99;
+    @media (max-width: 995px) {
+      position: absolute;
+      top: 100px;
+    }
   }
 
   .content {
     grid-area: content;
-    padding-top: 100px;
-    padding: 100px 20px 10px;
+    background-color: #e5e5e5;
+    padding: 42px 20px 10px;
     overflow: scroll;
+
+    h1 {
+      margin-bottom: 3rem;
+    }
+
+    .cardContainer {
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      min-width: 900px;
+    }
+  }
+
+  .paginationContainer {
+    margin-top: 20px;
+    .pagination {
+      list-style: none;
+
+      li {
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+
+      .pageButton {
+        background: var(--paleblue);
+      }
+
+      .disabled,
+      .pageItem {
+        opacity: 0.7;
+      }
+
+      .active {
+        opacity: 1;
+      }
+    }
   }
 }

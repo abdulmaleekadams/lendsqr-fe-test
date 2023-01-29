@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Dots, Filter } from "../../assets/icons";
+import { useState } from "react";
+import {
+  AUsers,
+  Dots,
+  Filter,
+  LUsers,
+  SUsers,
+  TUsers,
+} from "../../assets/icons";
 import "./index.scss";
 import UserOption from "../userOption/userOption";
+import UserDetails from "../userDetails/userDetails";
+import Card from "../cards";
 
 type Props = {
   setStatusHandler: any;
-  usersList?: any[];
+  usersList: any[];
+  viewDetails?: boolean;
 };
 
-const UserTable = ({ usersList }: Props) => {
+const UserTable = ({ usersList, viewDetails }: Props) => {
   const tableHeader = [
     "organization",
     "username",
@@ -17,28 +27,6 @@ const UserTable = ({ usersList }: Props) => {
     "date joined",
     "status",
   ];
-
-  // const usersURL =
-  //   "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users#";
-
-  // const [userData, setUserData] = useState<any>();
-  // const [loading, setLoading] = useState(true);
-
-  // const fetchUserData = async (URL: string) => {
-  //   try {
-  //     const response = await fetch(URL, { method: "GET" });
-  //     const data: [] = await response.json();
-  //     return setUserData([...data.slice(0, 10)]);
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setLoading(!loading);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchUserData(usersURL);
-  // });
 
   const convertDateToString: any = (dateToConvert: string) => {
     return new Date(dateToConvert)
@@ -53,67 +41,133 @@ const UserTable = ({ usersList }: Props) => {
       .replace("at", "");
   };
 
-  return (
-    <div className="userTable">
-      <div className="userTableHeader flex">
-        {tableHeader.map((title) => (
-          <div className={`flex title ${title.split(" ")[0]}`} key={title}>
-            <p>{title}</p>
-            <Filter />
-          </div>
-        ))}
-      </div>
+  const userDetails: any = (userId: number) => {
+    setViewUserDetails(!viewUserDetails);
+    setuserId(userId);
+    viewDetails = viewUserDetails;
+  };
 
-      <div className="userTableBody flexCol">
-        {usersList?.map(
-          (
-            user: {
-              orgName: string;
-              userName: string;
-              email: string;
-              phoneNumber: string;
-              createdAt: string;
-              id: number;
-            },
-            idx: number
-          ) => (
-            <div className="details flex" key={idx}>
-              <div className="organization">
-                <p title={user.orgName}>
-                  {user.orgName.substring(0, 10) +
-                    (user.orgName.length > 10 ? ".." : "")}
-                </p>
+  const [viewUserDetails, setViewUserDetails] = useState<boolean>(false);
+  const [userId, setuserId] = useState<number>(-1);
+
+  const userRecords = [
+    {
+      title: "users",
+      total: 2453,
+      icon: <TUsers />,
+    },
+    {
+      title: "active users",
+      total: 2453,
+      icon: <AUsers />,
+    },
+    {
+      title: "users with loans",
+      total: 12453,
+      icon: <LUsers />,
+    },
+    {
+      title: "users with savings",
+      total: 102453,
+      icon: <SUsers />,
+    },
+  ];
+
+  const returnDashboard: Function = () => {
+    setViewUserDetails(false)
+  }
+
+  return (
+    <>
+      {!viewUserDetails && (
+        <>
+          <h1>Users</h1>
+          <div className="flex cardContainer">
+            {userRecords.map(
+              (user: { title: string; total: number; icon: any }) => (
+                <Card
+                  icon={user.icon}
+                  title={user.title}
+                  total={user.total.toLocaleString()}
+                  key={user.title}
+                />
+              )
+            )}
+          </div>
+        </>
+      )}
+      <div className={`userTable ${viewUserDetails && "unset"}`}>
+        {!viewUserDetails && (
+          <div className="userTableHeader flex">
+            {tableHeader.map((title) => (
+              <div className={`flex title ${title.split(" ")[0]}`} key={title}>
+                <p>{title}</p>
+                <Filter />
               </div>
-              <div className="username">
-                <p title={user.userName}>
-                  {user.userName.substring(0, 15) +
-                    (user.userName.length > 15 ? ".." : "")}
-                </p>
-              </div>
-              <div className="email">
-                <p title={user.email}>
-                  {user.email.substring(0, 16) +
-                    (user.email.length > 16 ? ".." : "")}
-                </p>
-              </div>
-              <div className="phone">
-                <p>{user.phoneNumber.substring(0, 12)}</p>
-              </div>
-              <div className="date">
-                <p>{convertDateToString(user.createdAt)}</p>
-              </div>
-              <div className="status flexCenter">
-                <p>{"pending"}</p>
-              </div>
-              <div className={`detailsButton ${idx}`}>
-                <Dots />
-              </div>
-              <UserOption id={idx} />
-            </div>
-          )
+            ))}
+          </div>
         )}
+        <div className={`userTableBody flexCol`}>
+          {usersList?.map(
+            (
+              user: {
+                orgName: string;
+                userName: string;
+                email: string;
+                phoneNumber: string;
+                createdAt: string;
+                id: number;
+              },
+              idx: number
+            ) => (
+              <>
+                {!viewUserDetails && (
+                  <div className="details flex" key={idx}>
+                    <div className="organization">
+                      <p title={user.orgName}>
+                        {user.orgName.substring(0, 10) +
+                          (user.orgName.length > 10 ? ".." : "")}
+                      </p>
+                    </div>
+                    <div className="username">
+                      <p title={user.userName}>
+                        {user.userName.substring(0, 15) +
+                          (user.userName.length > 15 ? ".." : "")}
+                      </p>
+                    </div>
+                    <div className="email">
+                      <p title={user.email}>
+                        {user.email.substring(0, 16) +
+                          (user.email.length > 16 ? ".." : "")}
+                      </p>
+                    </div>
+                    <div className="phone">
+                      <p>{user.phoneNumber.substring(0, 12)}</p>
+                    </div>
+                    <div className="date">
+                      <p>{convertDateToString(user.createdAt)}</p>
+                    </div>
+                    <div className="status flexCenter">
+                      <p>{"pending"}</p>
+                    </div>
+                    <div
+                      className={`detailsButton ${idx}`}
+                      onClick={() => userDetails(idx)}
+                    >
+                      <Dots />
+                    </div>
+                    <UserOption id={idx} />
+                  </div>
+                )}
+                {viewUserDetails && userId === idx && (
+                  <UserDetails userRecord={usersList[idx]} returnDashboard={returnDashboard} />
+                )}
+              </>
+            )
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

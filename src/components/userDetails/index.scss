@@ -1,0 +1,138 @@
+.userDetails {
+  min-width: 900px;
+
+  row-gap: 3rem;
+  .userHeader {
+    gap: 1.2rem;
+    .backBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .userTitleAction {
+      .title {
+        margin-bottom: 0;
+      }
+      .action {
+        gap: 1rem;
+        .button {
+          padding-top: 0.6rem;
+          padding-bottom: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 0.09rem;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+
+  .userInfo {
+    background: var(--white);
+    box-shadow: 3px 5px 20px var(--paleblue);
+    padding: 15px 24px 0;
+
+    .userAccountDetails {
+      gap: 2rem;
+
+      .userID {
+        gap: 1rem;
+
+        .userName {
+          p {
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+          }
+        }
+      }
+
+      .userTier {
+        padding: 0 1.5rem;
+        border-left: 1px solid var(--paleblue);
+        border-right: 1px solid var(--paleblue);
+        font-weight: 500;
+
+        p{
+          margin-bottom: 0.5rem;
+        }
+
+        span{
+          gap: 0.4rem;
+        }
+      }
+
+      .userAccount {
+        p {
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
+      }
+    }
+    .userInfoMenu {
+      margin-top: 3rem;
+      gap: 1rem;
+      button {
+        all: unset;
+        padding: 0.6rem 1rem;
+        border-bottom: 2px solid transparent;
+        transition: all 0.5s ease;
+
+        &:hover {
+          border-bottom: 2px solid var(--lightblue);
+        }
+
+        &.active {
+          border-bottom: 2px solid var(--lightblue);
+        }
+      }
+    }
+  }
+
+  .userDetailsRecord {
+    background: var(--white);
+    box-shadow: 3px 5px 20px var(--paleblue);
+    padding: 15px 24px 0;
+
+    .record {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      &:not(:last-child){
+        border-bottom: 1px solid var(--paleblue);
+      }
+      .recordTitle {
+        font-weight: 600;
+        margin-bottom: 2rem;
+      }
+
+      .recordContentContainer {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        .recordContent {
+          width: 18%;
+          
+          &.emailaddress, .fullname{
+            flex: 1;
+          }
+          
+
+          p {
+            font-size: 0.75rem;
+          }
+
+          .details {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-top: 0.6rem;
+          }
+        }
+      }
+
+      &:nth-child(2){
+        .recordContent{
+          width: 25% !important;
+        }
+      }
+    }
+  }
+}

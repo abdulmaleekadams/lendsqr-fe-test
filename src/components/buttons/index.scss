@@ -12,3 +12,20 @@
     color: var(--white);
 
 }
+
+.secondary {
+    border: 1px solid var(--lightblue);
+    color: var(--lightblue)
+}
+
+.secondaryDanger{
+    @extend .secondary;
+    border-color: var(--red);
+    color: var(--red)
+}
+
+.secondaryWarning{
+    @extend .secondary;
+    border-color: var(--yellow);
+    color: var(--yellow)
+}

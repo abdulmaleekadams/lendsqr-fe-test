@@ -32,6 +32,12 @@ export { ReactComponent as TUsers } from "./tUsers.svg";
 export { ReactComponent as AUsers } from "./aUsers.svg";
 export { ReactComponent as LUsers } from "./userL.svg";
 export { ReactComponent as SUsers } from "./userSv.svg";
+export { ReactComponent as Back } from "./backArrow.svg";
+export { ReactComponent as UserAvatar } from "./userAvatar.svg";
+export { ReactComponent as Rating } from "./noRate.svg";
+
+
+
 
 
 

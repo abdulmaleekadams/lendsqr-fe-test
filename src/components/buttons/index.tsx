@@ -3,8 +3,8 @@ import "./index.scss";
 type Props = {
   label: string;
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
-  btnType: "button" | "reset" | "submit";
-  variant: "primary" | "secondary" | "warning" | "danger";
+  btnType?: "button" | "reset" | "submit";
+  variant?: "primary" | "secondary" | "secondaryDanger" | "secondaryWarning";
   customClass?: string;
 };
 

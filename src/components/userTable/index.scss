@@ -7,11 +7,12 @@
   height: auto;
   min-width: 900px;
 
+  
   .userTableHeader {
     width: 100%;
     text-transform: uppercase;
     column-gap: 0.75rem;
-
+    
     .title {
       font-size: 0.75rem;
       font-weight: 500;
@@ -20,7 +21,7 @@
       column-gap: 0.4rem;
     }
   }
-
+  
   .userTableBody {
     margin-top: 1.2rem;
     overflow: scroll;
@@ -39,7 +40,7 @@
           font-size: 0.8rem;
         }
       }
-
+      
       .status {
         padding: 5px 15px;
         background: var(--paleblue);
@@ -52,26 +53,33 @@
       }
     }
   }
-
+  
   .organization,
   .username,
   .phone {
     width: 15%;
     flex: 0 1 15%;
   }
-
+  
   .email {
     width: 17%;
     flex: 0 1 17%;
   }
-
+  
   .date {
     width: 20%;
     flex: 0 1 20%;
   }
-
+  
   .status {
     width: 8%;
     flex: 0 1 8%;
+  }
+  &.unset{
+   all: unset;
+
+   +.paginationContainer{
+    display: none;
+   }
   }
 }

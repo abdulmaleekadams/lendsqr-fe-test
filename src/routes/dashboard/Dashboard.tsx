@@ -3,36 +3,14 @@ import Header from "../../components/header";
 import Sidebar from "../../components/sidebar";
 import "./dashboard.scss";
 import UserTable from "../../components/userTable";
-import Card from "../../components/cards";
-import { AUsers, LUsers, SUsers, TUsers } from "../../assets/icons";
 import ReactPaginate from "react-paginate";
+
 
 type Props = {
   children?: any;
 };
 
-const userRecords = [
-  {
-    title: "users",
-    total: 2453,
-    icon: <TUsers />,
-  },
-  {
-    title: "active users",
-    total: 2453,
-    icon: <AUsers />,
-  },
-  {
-    title: "users with loans",
-    total: 12453,
-    icon: <LUsers />,
-  },
-  {
-    title: "users with savings",
-    total: 102453,
-    icon: <SUsers />,
-  },
-];
+
 
 const setStatusRandom: Function = (status: number) => {
   if (status > 0.5) {
@@ -48,7 +26,7 @@ const Dashboard = ({ children }: Props) => {
   const [pageCount, setPageCount] = useState(0);
   const [activePage, setActivePage] = useState<number>(0);
   const [usersCount, setUsersCount] = useState<number>(0);
-  const [totalUsers, setTotalUsers] = useState<number>(0)
+  const [totalUsers, setTotalUsers] = useState<number>(0);
   let limit = 9;
 
   useEffect(() => {
@@ -60,7 +38,7 @@ const Dashboard = ({ children }: Props) => {
       const data: [] = await res.json();
 
       const total = data.length;
-      setTotalUsers(total)
+      setTotalUsers(total);
 
       const paginatedList: any[] = [
         ...data.slice(limit * start, (start + 1) * limit),
@@ -71,9 +49,9 @@ const Dashboard = ({ children }: Props) => {
       setPageCount(Math.ceil(total / limit));
       const usersShown =
         paginatedList.length === limit
-          ? (activePage * limit) + paginatedList.length
+          ? activePage * limit + paginatedList.length
           : pageCount * limit - (limit - paginatedList.length);
-      setUsersCount(usersShown)
+      setUsersCount(usersShown);
     };
 
     getUsersList(activePage);
@@ -84,56 +62,41 @@ const Dashboard = ({ children }: Props) => {
     setActivePage(currentPage);
   };
 
+ 
   return (
     <div className="dashboard">
       <Header />
       <Sidebar />
       <div className="content">
-        <h1>Users</h1>
-        <div className="flex cardContainer">
-          {userRecords.map(
-            (user: { title: string; total: number; icon: any }) => (
-              <Card
-                icon={user.icon}
-                title={user.title}
-                total={user.total.toLocaleString()}
-                key={user.title}
-              />
-            )
-          )}
-        </div>
-        <UserTable setStatusHandler={setStatusRandom} usersList={usersList} />
-        <div className="flexBetween paginationContainer">
-          <div>Showing {usersCount} out of {totalUsers}</div>
-          <ReactPaginate
-            breakLabel="..."
-            pageCount={pageCount}
-            nextLabel=">"
-            previousLabel="<"
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            onPageChange={handleUserListTable}
-            containerClassName="pagination flex"
-            pageClassName="pageItem"
-            pageLinkClassName="pageLink"
-            previousClassName="pageButton"
-            nextClassName="pageButton"
-            nextLinkClassName="pageLink"
-            breakClassName="pageItem"
-            breakLinkClassName="pageLink"
-            activeClassName="active"
+        <>
+          <UserTable
+            setStatusHandler={setStatusRandom}
+            usersList={usersList}
           />
-        </div>
-        <div>
-
-          <div>
+          <div className="flexBetween paginationContainer">
             <div>
-
+              Showing {usersCount} out of {totalUsers}
             </div>
-          Go back
+            <ReactPaginate
+              breakLabel="..."
+              pageCount={pageCount}
+              nextLabel=">"
+              previousLabel="<"
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              onPageChange={handleUserListTable}
+              containerClassName="pagination flex"
+              pageClassName="pageItem"
+              pageLinkClassName="pageLink"
+              previousClassName="pageButton"
+              nextClassName="pageButton"
+              nextLinkClassName="pageLink"
+              breakClassName="pageItem"
+              breakLinkClassName="pageLink"
+              activeClassName="active"
+            />
           </div>
-        </div>
-        
+        </>
       </div>
     </div>
   );

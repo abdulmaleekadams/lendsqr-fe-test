@@ -2,28 +2,36 @@ import React, { useState } from "react";
 import Button from "../../components/buttons";
 import "./UserLogin.scss";
 
-
 type User = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 const UserLogin = () => {
-
   const [type, setType] = useState<string>("password");
 
   const togglePasswordVisiblity = () => {
     type === "text" ? setType("password") : setType("text");
   };
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [user, setUser] = useState<User>({ email: "", password: "" });
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email === "abdulmaleeekadams@gmail.com" && password === "lendsqr") {
-      localStorage.setItems("emailData", "abdulmaleeekadams@gmail.com");
-      localStorage.setItems("passwordData", "lendsqr");
+    alert('Clicked')
+    // validate user credentials
+
+    if (
+      user.email === "abdulmaleeekadams@gmail.com" &&
+      user.password === "lendsqr"
+    ) {
+      localStorage.setItem("user", JSON.stringify(user));
+      //Redirect to User dashboard
+      window.location.href = "/dashboard";
     }
   };
 
@@ -52,14 +60,16 @@ const UserLogin = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                value={user.email}
+                onChange={handleInputChange}
               />
               <div className="password flexAlignCenter">
                 <input
                   type={type}
                   name="password"
                   placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={user.password}
+                  onChange={handleInputChange}
                 />
                 <button
                   type="button"
@@ -73,7 +83,6 @@ const UserLogin = () => {
                 FORGOT PASSWORD?
               </a>
               <Button
-                // handleClick={handleSubmit}
                 btnType="submit"
                 label="LOG IN"
                 variant="primary"

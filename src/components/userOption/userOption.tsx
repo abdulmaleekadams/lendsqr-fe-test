@@ -10,7 +10,7 @@ type Props = {
 
 const UserOption = ({ id, activateUser, viewUser, blacklistUser }: Props) => {
   const handleActivate: any = () => {
-    activateUser();
+    activateUser(id);
   };
 
   const handleBlacklist: any = () => {
@@ -18,7 +18,7 @@ const UserOption = ({ id, activateUser, viewUser, blacklistUser }: Props) => {
   };
 
   const handleViewUser: any = () => {
-    viewUser();
+    viewUser(id);
   };
 
   return (

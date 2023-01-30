@@ -148,8 +148,10 @@ const UserTable: React.FC = () => {
     
   };
 
-  const activateUser = () => {
-    alert("View");
+  const activateUser = (id: number) => {
+    const updatedUsers = [...users];
+    updatedUsers[id].status = 'Active';
+    setUsers(updatedUsers);
   };
 
   const handleUserListTable = async (data: any) => {

@@ -1,17 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.scss";
 import App from "./App";
 import UserLogin from "./routes/userLogin/UserLogin";
-import User from "./routes/user/User";
 import Dashboard from "./routes/dashboard/Dashboard";
-
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+
     children: [
       {
         path: "/",
@@ -21,11 +20,11 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
       },
-      {
-        path: "user",
-        element: <User />,
-      },
     ],
+  },
+  {
+    path: "*",
+    element: <UserLogin />,
   },
 ]);
 

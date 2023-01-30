@@ -12,6 +12,7 @@ import UserOption from "../userOption/userOption";
 import UserDetails from "../userDetails/userDetails";
 import Card from "../cards";
 import ReactPaginate from "react-paginate";
+import UserFilter from "../userFilter/userFilter";
 
 type Props = {
   setStatusHandler: any;
@@ -35,12 +36,12 @@ const generateStatus = () => {
 };
 
 const UserTable: React.FC = () => {
-
   const [users, setUsers] = useState<User[]>([]);
   const [pageCount, setPageCount] = useState(0);
   const [activePage, setActivePage] = useState<number>(0);
   const [usersCount, setUsersCount] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [allUsers, setAllUsers] = useState<User[]>([])
 
   let limit = 9;
 
@@ -51,17 +52,26 @@ const UserTable: React.FC = () => {
     // API call to get user data
     const getUsersList = async (start: number) => {
       const res = await fetch(usersDetailsURL);
-      const data: [] = await res.json();
+      const data: User[] = await res.json();
 
       const total = data.length;
       setTotalUsers(total);
+
+
+
+      setAllUsers(
+        data.map(user => ({
+          ...user, status: generateStatus()
+        }))
+      
+      )
 
       const paginatedList: any[] = [
         ...data.slice(limit * start, (start + 1) * limit),
       ];
 
       setUsers(
-        paginatedList.map((user) => ({
+        paginatedList.map((user,idx) => ({
           ...user,
           status: generateStatus(),
         }))
@@ -78,7 +88,6 @@ const UserTable: React.FC = () => {
     getUsersList(activePage);
   }, [activePage, limit, pageCount]);
 
- 
   const tableHeader = [
     "organization",
     "username",
@@ -104,6 +113,7 @@ const UserTable: React.FC = () => {
   const [viewUserDetails, setViewUserDetails] = useState<boolean>(false);
   const [userId, setuserId] = useState<number>(-1);
   const [viewUserOption, setViewUserOption] = useState<boolean>(false);
+  const [filter, setFilter] = useState<boolean>(false)
 
   const userRecords = [
     {
@@ -143,14 +153,13 @@ const UserTable: React.FC = () => {
 
   const blacklistUser = (id: number) => {
     const updatedUsers = [...users];
-    updatedUsers[id].status = 'Blacklisted';
+    updatedUsers[id].status = "Blacklisted";
     setUsers(updatedUsers);
-    
   };
 
   const activateUser = (id: number) => {
     const updatedUsers = [...users];
-    updatedUsers[id].status = 'Active';
+    updatedUsers[id].status = "Active";
     setUsers(updatedUsers);
   };
 
@@ -158,6 +167,10 @@ const UserTable: React.FC = () => {
     let currentPage = data.selected;
     setActivePage(currentPage);
   };
+
+  const handleViewFilter = () => {
+    setFilter(!filter)
+  }
 
   return (
     <>
@@ -184,7 +197,7 @@ const UserTable: React.FC = () => {
             {tableHeader.map((title) => (
               <div className={`flex title ${title.split(" ")[0]}`} key={title}>
                 <p>{title}</p>
-                <Filter />
+                <Filter onClick={handleViewFilter} />
               </div>
             ))}
           </div>
@@ -193,6 +206,7 @@ const UserTable: React.FC = () => {
           className={`userTableBody flexCol`}
           onClick={() => setViewUserOption(false)}
         >
+          {filter && !viewUserDetails && <UserFilter users={allUsers} setFilteredUsers={setUsers} />}
           {users?.map((user, idx: number) => (
             <>
               {!viewUserDetails && (

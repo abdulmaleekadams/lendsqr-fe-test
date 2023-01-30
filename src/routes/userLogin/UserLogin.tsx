@@ -2,15 +2,29 @@ import React, { useState } from "react";
 import Button from "../../components/buttons";
 import "./UserLogin.scss";
 
+
+type User = {
+  email: string
+  password: string
+}
+
 const UserLogin = () => {
-  const handleLogin = () => {
-    alert("I got clicked");
-  };
 
   const [type, setType] = useState<string>("password");
 
   const togglePasswordVisiblity = () => {
     type === "text" ? setType("password") : setType("text");
+  };
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (email === "abdulmaleeekadams@gmail.com" && password === "lendsqr") {
+      localStorage.setItems("emailData", "abdulmaleeekadams@gmail.com");
+      localStorage.setItems("passwordData", "lendsqr");
+    }
   };
 
   return (
@@ -32,11 +46,21 @@ const UserLogin = () => {
             <span>Enter details to login</span>
           </div>
 
-          <div className="userDetails">
-            <form action="/dashboard" method="post" className="flexCol">
-              <input type="email" name="email" placeholder="Email" />
+          <div className="userDetailsForm">
+            <form onSubmit={handleSubmit} className="flexCol">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <div className="password flexAlignCenter">
-                <input type={type} name="password" placeholder="Password" />
+                <input
+                  type={type}
+                  name="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <button
                   type="button"
                   className="passwordVisiblity"
@@ -49,7 +73,7 @@ const UserLogin = () => {
                 FORGOT PASSWORD?
               </a>
               <Button
-                handleClick={handleLogin}
+                // handleClick={handleSubmit}
                 btnType="submit"
                 label="LOG IN"
                 variant="primary"

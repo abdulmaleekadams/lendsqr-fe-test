@@ -14,9 +14,17 @@
     }
   }
 
+.App{
+    height: 100vh;
+}
+
 .brand{
     padding: 0 6rem;
-    height: 100px;
+    margin-bottom: 7rem;
+
+    a{
+        display: inline-block;
+    }
 
     @include md-screen(){
         padding: 0 3rem;
@@ -86,7 +94,7 @@
             }
         }
 
-        .userDetails{
+        .userDetailsForm{
             form{
                 
                 gap: 1.5rem;

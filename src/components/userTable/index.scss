@@ -2,17 +2,15 @@
   background: var(--white);
   box-shadow: 0px 3px 3px 2px var(--paleblue);
   width: 100%;
-  overflow-y: scroll;
   padding: 15px 24px;
   height: auto;
   min-width: 900px;
 
-  
   .userTableHeader {
     width: 100%;
     text-transform: uppercase;
     column-gap: 0.75rem;
-    
+
     .title {
       font-size: 0.75rem;
       font-weight: 500;
@@ -21,10 +19,9 @@
       column-gap: 0.4rem;
     }
   }
-  
+
   .userTableBody {
     margin-top: 1.2rem;
-    overflow: scroll;
     width: 100%;
 
     .details {
@@ -40,12 +37,26 @@
           font-size: 0.8rem;
         }
       }
-      
+
       .status {
         padding: 5px 15px;
         background: var(--paleblue);
         border-radius: 30px;
-        width: max-content;
+
+        &.Blacklisted {
+          color: var(--red);
+          background: rgba(228, 3, 59, 0.2);
+        }
+
+        &.Active {
+          color: var(--green);
+          background: rgba(57, 205, 98, 0.2);
+        }
+
+        &.Pending {
+          color: var(--yellow);
+          background:rgba(233, 178, 0, 0.2)
+        }
       }
 
       .detailsButton {
@@ -53,33 +64,33 @@
       }
     }
   }
-  
+
   .organization,
   .username,
   .phone {
     width: 15%;
     flex: 0 1 15%;
   }
-  
+
   .email {
     width: 17%;
     flex: 0 1 17%;
   }
-  
+
   .date {
     width: 20%;
     flex: 0 1 20%;
   }
-  
-  .status {
-    width: 8%;
-    flex: 0 1 8%;
-  }
-  &.unset{
-   all: unset;
 
-   +.paginationContainer{
-    display: none;
-   }
+  .status {
+    width: 10%;
+    flex: 0 1 10%;
+  }
+  &.unset {
+    all: unset;
+
+    + .paginationContainer {
+      display: none;
+    }
   }
 }

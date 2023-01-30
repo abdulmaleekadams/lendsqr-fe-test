@@ -35,6 +35,10 @@ export { ReactComponent as SUsers } from "./userSv.svg";
 export { ReactComponent as Back } from "./backArrow.svg";
 export { ReactComponent as UserAvatar } from "./userAvatar.svg";
 export { ReactComponent as Rating } from "./noRate.svg";
+export { ReactComponent as View } from "./view.svg";
+export { ReactComponent as Blacklist } from "./blacklist.svg";
+export { ReactComponent as Activate } from "./activate.svg";
+
 
 
 

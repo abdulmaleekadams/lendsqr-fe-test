@@ -138,12 +138,12 @@ const UserDetails = ({ userRecord, returnDashboard }: Props) => {
           body: guarantor.phoneNumber.substring(0,14),
         },
         {
-          title: "EMAIL ADDRESS",
-          body: guarantor.email ? guarantor.email : 'Not provided',
-        },
-        {
           title: "RELATIONSHIP",
           body: guarantor.instagram,
+        },
+        {
+          title: "EMAIL ADDRESS",
+          body: guarantor.email ? guarantor.email : 'Not provided',
         },
       ],
     },

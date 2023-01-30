@@ -6,15 +6,30 @@
 
 .sidebar {
   box-shadow: 0px 3px 5px var(--paleblue);
-  overflow-y: scroll;
   position: relative;
   width: 240px;
-  min-height: 100vh;
   background: var(--white);
+
+  &.scroll-bottom {
+    position: relative;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
+    &:after {
+      content: "";
+      display: block;
+      height: 100%;
+      visibility: hidden;
+    }
+  }
+
+  &.scroll-bottom:after {
+    visibility: visible;
+  }
 
   .container {
     position: absolute;
-    top: 20px;
+    top: 35px;
     gap: 2rem;
     width: 100%;
 
@@ -65,6 +80,16 @@
     }
   }
 
+  .logout{
+    border-top: 1px solid var(--paleblue);
+    padding-bottom: 2rem;
+
+    span{
+      padding-left: 1.2rem;
+      margin-top: 2rem;
+    }
+  }
+
   @include md-screen() {
     width: 50px;
     transition: all 0.5s ease-out;
@@ -85,4 +110,5 @@
       }
     }
   }
+
 }

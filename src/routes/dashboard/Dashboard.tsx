@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { redirect } from "react-router-dom";
-
-import Header from "../../components/header";
-import Sidebar from "../../components/sidebar";
+import Header from "../../components/header/Header";
+import Sidebar from "../../components/sidebar/Sidebar";
 import "./dashboard.scss";
-import UserTable from "../../components/userTable";
+import UserTable from "../../components/userTable/UserTable";
 import UserLogin from "../userLogin/UserLogin";
 
 const Dashboard: React.FC = () => {
@@ -21,10 +19,15 @@ const Dashboard: React.FC = () => {
     return <UserLogin />;
   }
 
+  const logout = () => {
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+  }
+
   return (
     <div className="dashboard">
       <Header />
-      <Sidebar />
+      <Sidebar userLogout={logout}/>
       <div className="content">
         <>
           <UserTable />

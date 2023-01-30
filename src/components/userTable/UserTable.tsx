@@ -13,6 +13,7 @@ import UserDetails from "../userDetails/userDetails";
 import Card from "../cards";
 import ReactPaginate from "react-paginate";
 import UserFilter from "../userFilter/userFilter";
+import { Circles } from "react-loader-spinner";
 
 type Props = {
   setStatusHandler: any;
@@ -41,7 +42,13 @@ const UserTable: React.FC = () => {
   const [activePage, setActivePage] = useState<number>(0);
   const [usersCount, setUsersCount] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
-  const [allUsers, setAllUsers] = useState<User[]>([])
+  const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [viewUserDetails, setViewUserDetails] = useState<boolean>(false);
+  const [userId, setuserId] = useState<number>(-1);
+  const [viewUserOption, setViewUserOption] = useState<boolean>(false);
+  const [filter, setFilter] = useState<boolean>(false);
+
 
   let limit = 9;
 
@@ -52,30 +59,30 @@ const UserTable: React.FC = () => {
     // API call to get user data
     const getUsersList = async (start: number) => {
       const res = await fetch(usersDetailsURL);
+      setLoading(true);
       const data: User[] = await res.json();
 
       const total = data.length;
       setTotalUsers(total);
 
-
-
       setAllUsers(
-        data.map(user => ({
-          ...user, status: generateStatus()
+        data.map((user) => ({
+          ...user,
+          status: generateStatus(),
         }))
-      
-      )
+      );
 
       const paginatedList: any[] = [
         ...data.slice(limit * start, (start + 1) * limit),
       ];
 
       setUsers(
-        paginatedList.map((user,idx) => ({
+        paginatedList.map((user, idx) => ({
           ...user,
           status: generateStatus(),
         }))
       );
+      setLoading(false);
 
       setPageCount(Math.ceil(total / limit));
       const usersShown =
@@ -110,11 +117,7 @@ const UserTable: React.FC = () => {
       .replace("at", "");
   };
 
-  const [viewUserDetails, setViewUserDetails] = useState<boolean>(false);
-  const [userId, setuserId] = useState<number>(-1);
-  const [viewUserOption, setViewUserOption] = useState<boolean>(false);
-  const [filter, setFilter] = useState<boolean>(false)
-
+ 
   const userRecords = [
     {
       title: "users",
@@ -169,8 +172,8 @@ const UserTable: React.FC = () => {
   };
 
   const handleViewFilter = () => {
-    setFilter(!filter)
-  }
+    setFilter(!filter);
+  };
 
   return (
     <>
@@ -202,70 +205,86 @@ const UserTable: React.FC = () => {
             ))}
           </div>
         )}
-        <div
-          className={`userTableBody flexCol`}
-          onClick={() => setViewUserOption(false)}
-        >
-          {filter && !viewUserDetails && <UserFilter users={allUsers} setFilteredUsers={setUsers} />}
-          {users?.map((user, idx: number) => (
-            <>
-              {!viewUserDetails && (
-                <div className="details flex" key={idx}>
-                  <div className="organization">
-                    <p title={user.orgName}>
-                      {user.orgName.substring(0, 10) +
-                        (user.orgName.length > 10 ? ".." : "")}
-                    </p>
+        {loading ? (
+          <div className="flexCenter">
+            <Circles
+              height="80"
+              width="80"
+              color="#213f7d19"
+              ariaLabel="circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          </div>
+        ) : (
+          <div
+            className={`userTableBody flexCol`}
+            onClick={() => setViewUserOption(false)}
+          >
+            {filter && !viewUserDetails && (
+              <UserFilter users={allUsers} setFilteredUsers={setUsers} />
+            )}
+            {users?.map((user, idx: number) => (
+              <>
+                {!viewUserDetails && (
+                  <div className="details flex" key={idx}>
+                    <div className="organization">
+                      <p title={user.orgName}>
+                        {user.orgName.substring(0, 10) +
+                          (user.orgName.length > 10 ? ".." : "")}
+                      </p>
+                    </div>
+                    <div className="username">
+                      <p title={user.userName}>
+                        {user.userName.substring(0, 15) +
+                          (user.userName.length > 15 ? ".." : "")}
+                      </p>
+                    </div>
+                    <div className="email">
+                      <p title={user.email}>
+                        {user.email.substring(0, 16) +
+                          (user.email.length > 16 ? ".." : "")}
+                      </p>
+                    </div>
+                    <div className="phone">
+                      <p>{user.phoneNumber.substring(0, 12)}</p>
+                    </div>
+                    <div className="date">
+                      <p>{convertDateToString(user.createdAt)}</p>
+                    </div>
+                    <div className={`status flexCenter ${user.status}`}>
+                      <p>{user.status}</p>
+                    </div>
+                    <div
+                      className={`detailsButton ${idx}`}
+                      onClick={() => userOption(idx)}
+                      onMouseEnter={() => userOption(idx)}
+                    >
+                      <Dots />
+                    </div>
+                    {userId === idx && viewUserOption ? (
+                      <UserOption
+                        id={idx}
+                        activateUser={activateUser}
+                        blacklistUser={blacklistUser}
+                        viewUser={viewUser}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
-                  <div className="username">
-                    <p title={user.userName}>
-                      {user.userName.substring(0, 15) +
-                        (user.userName.length > 15 ? ".." : "")}
-                    </p>
-                  </div>
-                  <div className="email">
-                    <p title={user.email}>
-                      {user.email.substring(0, 16) +
-                        (user.email.length > 16 ? ".." : "")}
-                    </p>
-                  </div>
-                  <div className="phone">
-                    <p>{user.phoneNumber.substring(0, 12)}</p>
-                  </div>
-                  <div className="date">
-                    <p>{convertDateToString(user.createdAt)}</p>
-                  </div>
-                  <div className={`status flexCenter ${user.status}`}>
-                    <p>{user.status}</p>
-                  </div>
-                  <div
-                    className={`detailsButton ${idx}`}
-                    onClick={() => userOption(idx)}
-                    onMouseEnter={() => userOption(idx)}
-                  >
-                    <Dots />
-                  </div>
-                  {userId === idx && viewUserOption ? (
-                    <UserOption
-                      id={idx}
-                      activateUser={activateUser}
-                      blacklistUser={blacklistUser}
-                      viewUser={viewUser}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </div>
-              )}
-              {viewUserDetails && userId === idx && (
-                <UserDetails
-                  userRecord={users[userId]}
-                  returnDashboard={returnDashboard}
-                />
-              )}
-            </>
-          ))}
-        </div>
+                )}
+                {viewUserDetails && userId === idx && (
+                  <UserDetails
+                    userRecord={users[userId]}
+                    returnDashboard={returnDashboard}
+                  />
+                )}
+              </>
+            ))}
+          </div>
+        )}
       </div>
       <div className="flexBetween paginationContainer">
         <div>

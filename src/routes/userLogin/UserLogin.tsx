@@ -22,7 +22,7 @@ const UserLogin = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('Clicked')
+  
     // validate user credentials
 
     if (

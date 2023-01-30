@@ -1,5 +1,5 @@
 import React from "react";
-import IconTextMenu from "../iconTextMenu";
+import IconTextMenu from "../iconTextMenu/IconTextMenu";
 
 import "./index.scss";
 import {
@@ -27,7 +27,11 @@ import {
   Whitelist,
 } from "../../assets/icons";
 
-const Sidebar = () => {
+type Props = {
+  userLogout: Function
+}
+
+const Sidebar = ({userLogout}: Props) => {
   const menuGroup = [
     {
       title: "customers",
@@ -93,8 +97,13 @@ const Sidebar = () => {
       ],
     },
   ];
+
+  const handleLogout = () => {
+    userLogout()
+  }
+
   return (
-    <div className="sidebar flexColCenter">
+    <div className="sidebar scroll-bottom flexColCenter">
       <div className="container flexCol">
         <div className="organizationMenu">
           <a
@@ -126,6 +135,14 @@ const Sidebar = () => {
             ))}
           </div>
         ))}
+
+        <div className="flexCol menuItem logout" onClick={handleLogout}>
+          <a href="/" aria-label="Logout" className="menuItemLink">
+            <IconTextMenu text="Logout" />
+          </a>
+
+          <span>v1.2.0</span>
+        </div>
       </div>
     </div>
   );

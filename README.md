@@ -1,7 +1,7 @@
 ## User Admin Dashboard
 A simple user admin dashboard that allows an admin to view and manage users. This dashboard uses local storage for authentication.
 ```
-- Email: abdulmaleeek@gmail.com
+- Email: abdulmaleeekadams@gmail.com
 - password: lendsqr
 ```
 

@@ -1,4 +1,3 @@
-import React from "react";
 import IconTextMenu from "../iconTextMenu/IconTextMenu";
 
 import "./index.scss";

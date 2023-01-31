@@ -1,4 +1,3 @@
-import React from "react";
 import { Back, Rating, UserAvatar } from "../../assets/icons";
 import Button from "../buttons";
 import "./index.scss";

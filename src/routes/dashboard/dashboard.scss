@@ -17,9 +17,6 @@
   .sidebar {
     grid-area: sidebar;
     z-index: 99;
-    // @media (max-width: 995px) {
-    //   top: 100px;
-    // }
   }
 
   .content {
@@ -41,6 +38,7 @@
 
   .paginationContainer {
     margin-top: 20px;
+    min-width: 900px;
     .pagination {
       list-style: none;
 

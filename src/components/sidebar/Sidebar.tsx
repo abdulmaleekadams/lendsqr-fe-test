@@ -125,7 +125,7 @@ const Sidebar = ({userLogout}: Props) => {
             <p>{menuItem.title}</p>
             {menuItem.menu.map((item) => (
               <a
-                className="menuItemLink"
+                className={`menuItemLink ${item.text === 'Users' ? 'active' : ''}`}
                 href={item.text.toLowerCase().replaceAll(" ", "-")}
                 aria-label={item.text}
                 key={item.text}
